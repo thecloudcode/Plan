@@ -53,7 +53,7 @@ async def get_assessment(x: str = Query(..., title="User Input")):
     
     subjective = send_message(user_input)
 
-    return {"plan": subjective}
+    return {subjective}
 
 
 if __name__ == "__main__":
