@@ -32,12 +32,23 @@ def send_message(user_input):
 @app.get("/get_assessment/")
 async def get_assessment(x: str = Query(..., title="User Input")):
     user_input = f"""
-        Please, do mention the ICD-10 and CPT codes from your medical knowledge even it is not mentioned in the conversation. Answer it in given format. The conversation between doctor and patient.:{x}
+        The conversation between doctor and patient. Please, mention the ICD-10 and CPT codes from your medical knowledge even though it is not in the conversation and extract the information from the conversation and . Answer it in given format. :{x}
+
+        Assessment:
+        Diagnosis: (ICD codes: [ICD-10 codes])
 
         Plan:
         Treatment:
-        Procedural Codes (CPT) for tests:
-    """
+        Procedural Codes (CPT) for tests: [CPT codes]
+
+        Assessment:
+        Diagnosis: [Primary and secondary diagnoses] (ICD codes: [ICD-10 codes])
+
+        Plan:
+        Treatment: [Medications]
+        Patient Education: [Information provided to the patient]
+        Follow-up: [Return date, monitoring details]
+        Procedural Codes (CPT): [CPT codes]"""
     subjective = send_message(user_input)
 
     return {"plan": subjective}
