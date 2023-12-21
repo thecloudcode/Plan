@@ -34,12 +34,13 @@ async def get_assessment(x: str = Query(..., title="User Input")):
     user_input = f"""
         The conversation between doctor and patient. Please, mention the ICD-10 and CPT codes from your medical knowledge even though it is not in the conversation and extract the information from the conversation and . Answer it in given format. :{x}
 
-        Assessment:
-        Diagnosis: (ICD codes: [ICD-10 codes])
+        Subjective:
+        State all the complains and symptoms faced by the patient, with history of present illness. 
 
-        Plan:
-        Treatment:
-        Procedural Codes (CPT) for tests: [CPT codes]
+        Objective:
+        Vital Signs:
+        Physical Examination:
+        Diagnostic Tests:
 
         Assessment:
         Diagnosis: [Primary and secondary diagnoses] (ICD codes: [ICD-10 codes])
@@ -49,6 +50,7 @@ async def get_assessment(x: str = Query(..., title="User Input")):
         Patient Education: [Information provided to the patient]
         Follow-up: [Return date, monitoring details]
         Procedural Codes (CPT): [CPT codes]"""
+    
     subjective = send_message(user_input)
 
     return {"plan": subjective}
